@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couples Meal Plan - Week 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .overview {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+        
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .profile-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .profile-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .profile-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .profile-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .profile-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .day-section {
+            margin-bottom: 50px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .day-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .meal {
+            padding: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .meal:last-child {
+            border-bottom: none;
+        }
+        
+        .meal-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            margin: -30px -30px 20px -30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .meal-time {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .portions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        
+        .portion {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .portion.male {
+            border-left-color: #764ba2;
+        }
+        
+        .portion-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .portion.male .portion-label {
+            color: #764ba2;
+        }
+        
+        .portion ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .portion li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .portion li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .cooking-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            font-style: italic;
+        }
+        
+        .workout-note {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .totals {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .total-item {
+            padding: 10px;
+        }
+        
+        .summary-section {
+            background: #f8f9fa;
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+        
+        .summary-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            text-align: center;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .summary-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .prep-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .prep-section h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 35px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+            color: #667eea;
+        }
+        
+        .variety-highlights {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .variety-highlights h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .variety-highlights ul {
+            columns: 2;
+            column-gap: 30px;
+        }
+        
+        .variety-highlights li {
+            padding: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .profile-grid,
+            .portions,
+            .totals,
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .variety-highlights ul {
+                columns: 1;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🥗 Couples Meal Plan - Week 2 💪</h1>
+            <p>Female (55) + Male (57) - Weekly Fitness & Nutrition Program with Variety</p>
+        </div>
+        
+        <div class="content">
+            <div class="overview">
+                <h2 style="color: #667eea; margin-bottom: 20px;">Program Overview</h2>
+                
+                <div class="profile-grid">
+                    <div class="profile-card">
+                        <h3>👩 Female 55 Profile</h3>
+                        <ul>
+                            <li><strong>Goal:</strong> Weight loss (14 lbs over 10-14 weeks)</li>
+                            <li><strong>Weight:</strong> ~155 lbs → Target: ~141 lbs</li>
+                            <li><strong>Daily Calories:</strong> 1,400-1,740</li>
+                            <li><strong>Macros:</strong> 40% protein | 35% carbs | 25% fat</li>
+                            <li><strong>Workouts:</strong> 6 days/week</li>
+                            <li><strong>Wake Time:</strong> 6:30 AM (Mon-Fri), 7:30 AM (Sat)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-card">
+                        <h3>👨 Male 57 Profile</h3>
+                        <ul>
+                            <li><strong>Goal:</strong> Fat loss and muscle maintenance</li>
+                            <li><strong>Weight:</strong> ~185-195 lbs</li>
+                            <li><strong>Daily Calories:</strong> 1,900-2,400</li>
+                            <li><strong>Macros:</strong> 35% protein | 40% carbs | 25% fat</li>
+                            <li><strong>Workouts:</strong> 6 days/week</li>
+                            <li><strong>Wake Time:</strong> 6:30 AM (Mon-Fri), 7:30 AM (Sat)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; margin-top: 20px; border-radius: 8px;">
+                    <h3 style="color: #764ba2; margin-bottom: 10px;">Combined Cooking Strategy</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li>✓ Prepare base meals together</li>
+                        <li>✓ Male portions are 1.25-1.5x larger</li>
+                        <li>✓ Same foods, different quantities</li>
+                        <li>✓ Efficient meal prep on Sundays</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MONDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    MONDAY - Tonal Full Body (Evening 7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 AM - BREAKFAST</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (290 cal | 28g P | 30g C | 7g F)</div>
+                            <ul>
+                                <li>Cottage cheese bowl (½ cup) with diced peaches</li>
+                                <li>1 slice Ezekiel bread toasted</li>
+                                <li>Turkey sausage link (1)</li>
+                                <li>Black coffee or tea</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (410 cal | 38g P | 42g C | 11g F)</div>
+                            <ul>
+                                <li>Cottage cheese bowl (¾ cup) with diced peaches</li>
+                                <li>2 slices Ezekiel bread toasted</li>
+                                <li>Turkey sausage links (2)</li>
+                                <li>Black coffee or tea</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Same breakfast, scaled portions
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">10:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (170 cal | 20g P | 14g C | 4g F)</div>
+                            <ul>
+                                <li>Vanilla protein powder (20g) mixed with water</li>
+                                <li>1 small apple</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (240 cal | 28g P | 20g C | 6g F)</div>
+                            <ul>
+                                <li>Vanilla protein powder (25g) mixed with water</li>
+                                <li>1 medium apple</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:00 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (430 cal | 34g P | 46g C | 9g F)</div>
+                            <ul>
+                                <li>Asian-style lettuce wraps with ground turkey (4 oz)</li>
+                                <li>Water chestnuts, shredded carrots, snap peas</li>
+                                <li>Brown rice (½ cup)</li>
+                                <li>Low-sodium soy sauce/ginger dressing</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (600 cal | 48g P | 62g C | 14g F)</div>
+                            <ul>
+                                <li>Asian-style lettuce wraps with ground turkey (6 oz)</li>
+                                <li>Water chestnuts, shredded carrots, snap peas</li>
+                                <li>Brown rice (¾ cup)</li>
+                                <li>Low-sodium soy sauce/ginger dressing</li>
+                                <li>5 whole grain crackers</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Cook ground turkey together with Asian seasonings (ginger, garlic, low-sodium soy)
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">4:00 PM - AFTERNOON SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (150 cal | 18g P | 16g C | 2g F)</div>
+                            <ul>
+                                <li>Sliced turkey breast (2 oz) wrapped around bell pepper strips</li>
+                                <li>8 baby carrots with 1 tbsp hummus</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (210 cal | 26g P | 22g C | 3g F)</div>
+                            <ul>
+                                <li>Sliced turkey breast (3 oz) wrapped around bell pepper strips</li>
+                                <li>12 baby carrots with 2 tbsp hummus</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">5:45 PM - PRE-WORKOUT MEAL</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (290 cal | 28g P | 36g C | 5g F)</div>
+                            <ul>
+                                <li>Baked cod (4 oz) with lemon and herbs</li>
+                                <li>Sweet potato (½ cup, 3 oz)</li>
+                                <li>Steamed asparagus</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (410 cal | 40g P | 48g C | 8g F)</div>
+                            <ul>
+                                <li>Baked cod (6 oz) with lemon and herbs</li>
+                                <li>Sweet potato (¾ cup, 4.5 oz)</li>
+                                <li>Steamed asparagus</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Bake cod and sweet potatoes together, steam asparagus
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🏋️ 7:00-7:30 PM - TONAL FULL BODY SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (230 cal | 26g P | 26g C | 3g F)</div>
+                            <ul>
+                                <li>Chocolate protein shake: 25g whey protein, ½ banana, unsweetened almond milk</li>
+                                <li>Ice and cinnamon</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (310 cal | 34g P | 36g C | 5g F)</div>
+                            <ul>
+                                <li>Chocolate protein shake: 30g whey protein, 1 banana, unsweetened almond milk</li>
+                                <li>Ice and cinnamon</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (110 cal | 16g P | 8g C | 2g F)</div>
+                            <ul>
+                                <li>Sliced deli turkey (2 oz)</li>
+                                <li>Cherry tomatoes and cucumber slices</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (150 cal | 22g P | 12g C | 2g F)</div>
+                            <ul>
+                                <li>Sliced deli turkey (3 oz)</li>
+                                <li>Cherry tomatoes and cucumber slices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,670 cal | 170g P | 176g C | 32g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,330 cal | 236g P | 242g C | 49g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- TUESDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    TUESDAY - Pickleball (5:00 PM) + Peloton HIIT (7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 AM - BREAKFAST</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (370 cal | 26g P | 40g C | 10g F)</div>
+                            <ul>
+                                <li>Breakfast burrito: 1 whole grain tortilla (8"), scrambled eggs (2 whole)</li>
+                                <li>Salsa, diced tomatoes, spinach</li>
+                                <li>½ cup sliced strawberries</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (510 cal | 36g P | 54g C | 15g F)</div>
+                            <ul>
+                                <li>Breakfast burrito: 1 large whole grain tortilla (10"), scrambled eggs (3 whole)</li>
+                                <li>Salsa, diced tomatoes, spinach, 1 tbsp shredded cheese</li>
+                                <li>½ cup sliced strawberries</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">10:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (180 cal | 18g P | 18g C | 5g F)</div>
+                            <ul>
+                                <li>Hard-boiled eggs (2)</li>
+                                <li>½ cup grapes</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (240 cal | 24g P | 24g C | 7g F)</div>
+                            <ul>
+                                <li>Hard-boiled eggs (3)</li>
+                                <li>1 cup grapes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:00 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (440 cal | 32g P | 54g C | 9g F)</div>
+                            <ul>
+                                <li>Mediterranean chicken pita: grilled chicken (4 oz), cucumber, tomato, red onion</li>
+                                <li>1 whole wheat pita (6")</li>
+                                <li>Tzatziki sauce (2 tbsp)</li>
+                                <li>Side: mixed greens</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (610 cal | 46g P | 72g C | 14g F)</div>
+                            <ul>
+                                <li>Mediterranean chicken pita: grilled chicken (6 oz), cucumber, tomato, red onion</li>
+                                <li>1 whole wheat pita (8")</li>
+                                <li>Tzatziki sauce (3 tbsp)</li>
+                                <li>Side: mixed greens with olive oil drizzle</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Grill chicken, prep tzatziki sauce (Greek yogurt, cucumber, dill, garlic)
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">3:30 PM - PRE-PICKLEBALL SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (130 cal | 4g P | 24g C | 3g F)</div>
+                            <ul>
+                                <li>Rice cake (1) with 1 tsp peanut butter</li>
+                                <li>½ cup pineapple chunks</li>
+                                <li>16 oz water</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (190 cal | 6g P | 32g C | 5g F)</div>
+                            <ul>
+                                <li>Rice cakes (2) with 1.5 tsp peanut butter</li>
+                                <li>½ cup pineapple chunks</li>
+                                <li>16 oz water</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🏓 5:00-6:00 PM - PICKLEBALL SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:15 PM - POST-PICKLEBALL SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (110 cal | 14g P | 12g C | 1g F)</div>
+                            <ul>
+                                <li>Protein shake: 15g whey protein + water</li>
+                                <li>10 cherries</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (160 cal | 20g P | 18g C | 2g F)</div>
+                            <ul>
+                                <li>Protein shake: 20g whey protein + water</li>
+                                <li>15 cherries</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🚴 7:00-7:30 PM - PELOTON HIIT SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (210 cal | 24g P | 26g C | 2g F)</div>
+                            <ul>
+                                <li>Vanilla protein shake: 25g protein, ½ cup frozen mango, almond milk</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (290 cal | 30g P | 36g C | 4g F)</div>
+                            <ul>
+                                <li>Vanilla protein shake: 30g protein, 1 cup frozen mango, almond milk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (100 cal | 14g P | 6g C | 2g F)</div>
+                            <ul>
+                                <li>String cheese (1)</li>
+                                <li>Celery sticks with everything bagel seasoning</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (140 cal | 20g P | 8g C | 3g F)</div>
+                            <ul>
+                                <li>String cheese (2)</li>
+                                <li>Celery sticks with everything bagel seasoning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,540 cal | 132g P | 180g C | 32g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,140 cal | 182g P | 244g C | 50g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- WEDNESDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    WEDNESDAY - Pickleball (5:00 PM) + Tonal Upper Body (7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 AM - BREAKFAST</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (330 cal | 30g P | 32g C | 8g F)</div>
+                            <ul>
+                                <li>Egg and turkey sausage muffin: English muffin (1)</li>
+                                <li>Scrambled eggs (2 whole + 1 white)</li>
+                                <li>Turkey sausage patty (1)</li>
+                                <li>Sliced tomato</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (460 cal | 42g P | 44g C | 12g F)</div>
+                            <ul>
+                                <li>Egg and turkey sausage muffin: English muffin (1.5)</li>
+                                <li>Scrambled eggs (3 whole + 2 whites)</li>
+                                <li>Turkey sausage patties (2)</li>
+                                <li>Sliced tomato</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">10:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (170 cal | 8g P | 14g C | 10g F)</div>
+                            <ul>
+                                <li>Celery sticks (unlimited)</li>
+                                <li>Almond butter (1.5 tbsp)</li>
+                                <li>10 blueberries</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (240 cal | 12g P | 20g C | 14g F)</div>
+                            <ul>
+                                <li>Celery sticks (unlimited)</li>
+                                <li>Almond butter (2 tbsp)</li>
+                                <li>½ cup blueberries</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:00 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (460 cal | 36g P | 52g C | 10g F)</div>
+                            <ul>
+                                <li>Tuna salad stuffed tomato: tuna (4 oz), Greek yogurt-based dressing</li>
+                                <li>Whole grain crackers (6)</li>
+                                <li>Side: cucumber salad with vinegar</li>
+                                <li>Clementine</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (640 cal | 50g P | 70g C | 15g F)</div>
+                            <ul>
+                                <li>Tuna salad stuffed tomato: tuna (6 oz), Greek yogurt-based dressing</li>
+                                <li>Whole grain crackers (10)</li>
+                                <li>Side: cucumber salad with vinegar</li>
+                                <li>Clementine</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Mix tuna with Greek yogurt, celery, mustard, lemon
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">3:30 PM - PRE-PICKLEBALL SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (120 cal | 3g P | 22g C | 3g F)</div>
+                            <ul>
+                                <li>Apple slices with ½ tsp honey drizzle</li>
+                                <li>5 almonds</li>
+                                <li>16 oz water</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (180 cal | 5g P | 30g C | 5g F)</div>
+                            <ul>
+                                <li>Apple slices with 1 tsp honey drizzle</li>
+                                <li>10 almonds</li>
+                                <li>16 oz water</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🏓 5:00-6:00 PM - PICKLEBALL SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:15 PM - POST-PICKLEBALL SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (120 cal | 16g P | 14g C | 1g F)</div>
+                            <ul>
+                                <li>Protein shake: 15g whey protein + water</li>
+                                <li>12 grapes</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (170 cal | 22g P | 20g C | 2g F)</div>
+                            <ul>
+                                <li>Protein shake: 20g whey protein + water</li>
+                                <li>18 grapes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🏋️ 7:00-7:30 PM - TONAL UPPER BODY SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (240 cal | 28g P | 28g C | 3g F)</div>
+                            <ul>
+                                <li>Protein smoothie: 25g protein, ½ cup frozen berries, spinach, almond milk</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (320 cal | 36g P | 38g C | 5g F)</div>
+                            <ul>
+                                <li>Protein smoothie: 30g protein, 1 cup frozen berries, spinach, almond milk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (90 cal | 12g P | 8g C | 1g F)</div>
+                            <ul>
+                                <li>Turkey breast slices (2 oz)</li>
+                                <li>Sliced bell peppers</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (130 cal | 18g P | 12g C | 2g F)</div>
+                            <ul>
+                                <li>Turkey breast slices (3 oz)</li>
+                                <li>Sliced bell peppers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,530 cal | 133g P | 170g C | 36g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,140 cal | 185g P | 234g C | 55g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- THURSDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    THURSDAY - Tonal Lower Body (Evening 7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 AM - BREAKFAST</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (360 cal | 28g P | 38g C | 9g F)</div>
+                            <ul>
+                                <li>Overnight oats: ½ cup oats, Greek yogurt (⅓ cup), raspberries</li>
+                                <li>2 turkey bacon strips</li>
+                                <li>Cinnamon and vanilla extract</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (500 cal | 38g P | 52g C | 14g F)</div>
+                            <ul>
+                                <li>Overnight oats: ¾ cup oats, Greek yogurt (½ cup), raspberries</li>
+                                <li>3 turkey bacon strips</li>
+                                <li>Cinnamon and vanilla extract</li>
+                                <li>10 almonds</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Prep overnight oats evening before, cook bacon together
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">10:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (180 cal | 20g P | 16g C | 4g F)</div>
+                            <ul>
+                                <li>Protein bar (Quest or similar, 20g protein)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (250 cal | 28g P | 22g C | 6g F)</div>
+                            <ul>
+                                <li>Protein bar (Quest or similar, 20g protein)</li>
+                                <li>1 small banana</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:00 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (440 cal | 34g P | 48g C | 11g F)</div>
+                            <ul>
+                                <li>Shrimp and avocado salad: grilled shrimp (4 oz)</li>
+                                <li>Mixed greens, cherry tomatoes, cucumber</li>
+                                <li>¼ avocado</li>
+                                <li>Farro or barley (½ cup)</li>
+                                <li>Lemon vinaigrette</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (610 cal | 48g P | 66g C | 16g F)</div>
+                            <ul>
+                                <li>Shrimp and avocado salad: grilled shrimp (6 oz)</li>
+                                <li>Mixed greens, cherry tomatoes, cucumber</li>
+                                <li>½ avocado</li>
+                                <li>Farro or barley (¾ cup)</li>
+                                <li>Lemon vinaigrette</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Grill shrimp with garlic and lemon, prep salad ingredients
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">4:00 PM - AFTERNOON SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (150 cal | 22g P | 12g C | 2g F)</div>
+                            <ul>
+                                <li>Chocolate protein shake: 20g whey protein, water, ice</li>
+                                <li>Strawberries (5)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (210 cal | 28g P | 18g C | 3g F)</div>
+                            <ul>
+                                <li>Chocolate protein shake: 25g whey protein, water, ice</li>
+                                <li>Strawberries (10)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">5:45 PM - PRE-WORKOUT MEAL</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (280 cal | 26g P | 36g C | 4g F)</div>
+                            <ul>
+                                <li>Chicken breast (3 oz) with herbs</li>
+                                <li>Baked sweet potato fries (½ medium potato, 3 oz)</li>
+                                <li>Green beans</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (400 cal | 38g P | 48g C | 7g F)</div>
+                            <ul>
+                                <li>Chicken breast (5 oz) with herbs</li>
+                                <li>Baked sweet potato fries (¾ medium potato, 4.5 oz)</li>
+                                <li>Green beans</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Bake chicken and sweet potato together
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🏋️ 7:00-7:30 PM - TONAL LOWER BODY SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (230 cal | 26g P | 28g C | 3g F)</div>
+                            <ul>
+                                <li>Strawberry protein shake: 25g protein, ½ cup strawberries, almond milk</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (310 cal | 34g P | 38g C | 5g F)</div>
+                            <ul>
+                                <li>Strawberry protein shake: 30g protein, 1 cup strawberries, almond milk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (100 cal | 12g P | 10g C | 2g F)</div>
+                            <ul>
+                                <li>Cottage cheese (½ cup) with cucumber slices</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (140 cal | 18g P | 14g C | 3g F)</div>
+                            <ul>
+                                <li>Cottage cheese (¾ cup) with cucumber slices</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,640 cal | 168g P | 188g C | 35g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,320 cal | 232g P | 258g C | 54g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRIDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    FRIDAY - Peloton Power Zone (Evening 7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 AM - BREAKFAST</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (340 cal | 30g P | 34g C | 8g F)</div>
+                            <ul>
+                                <li>Greek yogurt parfait: plain non-fat Greek yogurt (1 cup)</li>
+                                <li>Granola (¼ cup, low-sugar)</li>
+                                <li>Mixed berries (½ cup)</li>
+                                <li>Drizzle of honey</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (470 cal | 42g P | 46g C | 12g F)</div>
+                            <ul>
+                                <li>Greek yogurt parfait: plain non-fat Greek yogurt (1.5 cups)</li>
+                                <li>Granola (⅓ cup, low-sugar)</li>
+                                <li>Mixed berries (½ cup)</li>
+                                <li>Drizzle of honey</li>
+                                <li>10 almonds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">10:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (160 cal | 18g P | 14g C | 4g F)</div>
+                            <ul>
+                                <li>Deli turkey breast (3 oz) rolled up</li>
+                                <li>Cherry tomatoes and bell pepper strips</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (220 cal | 26g P | 20g C | 5g F)</div>
+                            <ul>
+                                <li>Deli turkey breast (4 oz) rolled up</li>
+                                <li>Cherry tomatoes and bell pepper strips</li>
+                                <li>6 whole grain crackers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:00 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (450 cal | 34g P | 50g C | 10g F)</div>
+                            <ul>
+                                <li>Chicken Caesar-style salad (lightened): grilled chicken (4 oz)</li>
+                                <li>Romaine lettuce, parmesan (1 tbsp)</li>
+                                <li>Greek yogurt Caesar dressing (2 tbsp)</li>
+                                <li>Whole grain croutons (¼ cup)</li>
+                                <li>Side: apple slices</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (620 cal | 48g P | 68g C | 15g F)</div>
+                            <ul>
+                                <li>Chicken Caesar-style salad (lightened): grilled chicken (6 oz)</li>
+                                <li>Romaine lettuce, parmesan (2 tbsp)</li>
+                                <li>Greek yogurt Caesar dressing (3 tbsp)</li>
+                                <li>Whole grain croutons (⅓ cup)</li>
+                                <li>Side: apple slices</li>
+                                <li>1 whole grain roll</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Grill chicken, make Greek yogurt Caesar (Greek yogurt, lemon, garlic, parmesan, anchovy paste)
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">4:00 PM - AFTERNOON SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (140 cal | 6g P | 18g C | 5g F)</div>
+                            <ul>
+                                <li>Guacamole (3 tbsp) with bell pepper strips and cucumber</li>
+                                <li>4 whole grain crackers</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (200 cal | 8g P | 26g C | 8g F)</div>
+                            <ul>
+                                <li>Guacamole (4 tbsp) with bell pepper strips and cucumber</li>
+                                <li>8 whole grain crackers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">5:45 PM - PRE-WORKOUT MEAL</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (260 cal | 24g P | 32g C | 4g F)</div>
+                            <ul>
+                                <li>Tilapia (4 oz) baked with lime and cilantro</li>
+                                <li>Jasmine rice (½ cup)</li>
+                                <li>Sautéed zucchini</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (380 cal | 36g P | 44g C | 7g F)</div>
+                            <ul>
+                                <li>Tilapia (6 oz) baked with lime and cilantro</li>
+                                <li>Jasmine rice (¾ cup)</li>
+                                <li>Sautéed zucchini</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Bake fish together, cook rice in rice cooker
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🚴 7:00-7:30 PM - PELOTON POWER ZONE SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (220 cal | 24g P | 26g C | 3g F)</div>
+                            <ul>
+                                <li>Vanilla protein shake: 25g protein, ½ frozen banana, almond milk, dash vanilla</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (300 cal | 32g P | 36g C | 5g F)</div>
+                            <ul>
+                                <li>Vanilla protein shake: 30g protein, 1 frozen banana, almond milk, dash vanilla</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (90 cal | 10g P | 10g C | 1g F)</div>
+                            <ul>
+                                <li>Air-popped popcorn (2 cups)</li>
+                                <li>String cheese (½)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (130 cal | 14g P | 14g C | 2g F)</div>
+                            <ul>
+                                <li>Air-popped popcorn (2 cups)</li>
+                                <li>String cheese (1)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,660 cal | 146g P | 184g C | 35g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,320 cal | 206g P | 254g C | 54g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- SATURDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    SATURDAY - Peloton Endurance (Evening 7:00 PM)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:30 AM - BREAKFAST (RELAXED WEEKEND)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (350 cal | 26g P | 38g C | 10g F)</div>
+                            <ul>
+                                <li>French toast (2 slices): whole grain bread dipped in egg mixture</li>
+                                <li>Sugar-free syrup</li>
+                                <li>Turkey sausage links (2)</li>
+                                <li>Fresh berries (½ cup)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (490 cal | 36g P | 52g C | 15g F)</div>
+                            <ul>
+                                <li>French toast (3 slices): whole grain bread dipped in egg mixture</li>
+                                <li>Sugar-free syrup</li>
+                                <li>Turkey sausage links (3)</li>
+                                <li>Fresh berries (½ cup)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Make egg mixture together (eggs, cinnamon, vanilla), cook French toast on griddle
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">11:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (190 cal | 16g P | 22g C | 5g F)</div>
+                            <ul>
+                                <li>Smoothie: protein powder (15g), ½ cup strawberries, spinach, water</li>
+                                <li>6 almonds</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (260 cal | 22g P | 30g C | 7g F)</div>
+                            <ul>
+                                <li>Smoothie: protein powder (20g), 1 cup strawberries, spinach, water</li>
+                                <li>12 almonds</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:30 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (420 cal | 34g P | 44g C | 11g F)</div>
+                            <ul>
+                                <li>Open-faced tuna melt: tuna (4 oz) with Greek yogurt, on whole grain bread (1 slice)</li>
+                                <li>Melted low-fat cheese (1 slice)</li>
+                                <li>Side salad with balsamic vinegar</li>
+                                <li>Pear</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (580 cal | 48g P | 60g C | 16g F)</div>
+                            <ul>
+                                <li>Open-faced tuna melt: tuna (6 oz) with Greek yogurt, on whole grain bread (2 slices)</li>
+                                <li>Melted low-fat cheese (2 slices)</li>
+                                <li>Side salad with balsamic vinegar</li>
+                                <li>Pear</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Mix tuna salad, broil sandwiches together
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">4:00 PM - AFTERNOON SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (150 cal | 4g P | 18g C | 7g F)</div>
+                            <ul>
+                                <li>Baby carrots and snap peas with guacamole (3 tbsp)</li>
+                                <li>4 multigrain crackers</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (220 cal | 6g P | 26g C | 10g F)</div>
+                            <ul>
+                                <li>Baby carrots and snap peas with guacamole (4 tbsp)</li>
+                                <li>8 multigrain crackers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">5:45 PM - PRE-WORKOUT MEAL</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (250 cal | 28g P | 26g C | 4g F)</div>
+                            <ul>
+                                <li>Grilled turkey burger patty (4 oz) - no bun</li>
+                                <li>Roasted Brussels sprouts</li>
+                                <li>Small side of quinoa (⅓ cup)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (360 cal | 40g P | 36g C | 7g F)</div>
+                            <ul>
+                                <li>Grilled turkey burger patty (6 oz) - no bun</li>
+                                <li>Roasted Brussels sprouts</li>
+                                <li>Side of quinoa (½ cup)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Grill turkey burgers, roast Brussels sprouts
+                    </div>
+                </div>
+                
+                <div class="workout-note">
+                    🚴 7:00-7:30 PM - PELOTON ENDURANCE SESSION (BOTH)
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">7:45 PM - POST-WORKOUT RECOVERY</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (210 cal | 24g P | 24g C | 3g F)</div>
+                            <ul>
+                                <li>Blueberry protein shake: 25g protein, ½ cup blueberries, almond milk</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (290 cal | 30g P | 34g C | 5g F)</div>
+                            <ul>
+                                <li>Blueberry protein shake: 30g protein, 1 cup blueberries, almond milk</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (100 cal | 14g P | 8g C | 2g F)</div>
+                            <ul>
+                                <li>Low-fat cottage cheese (½ cup) with sliced radishes and everything bagel seasoning</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (140 cal | 20g P | 12g C | 3g F)</div>
+                            <ul>
+                                <li>Low-fat cottage cheese (¾ cup) with sliced radishes and everything bagel seasoning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,670 cal | 146g P | 180g C | 42g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,340 cal | 202g P | 250g C | 63g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUNDAY -->
+            <div class="day-section">
+                <div class="day-header">
+                    SUNDAY - REST DAY
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">8:00 AM - BREAKFAST (LEISURELY WEEKEND)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (370 cal | 28g P | 40g C | 9g F)</div>
+                            <ul>
+                                <li>Veggie egg scramble: eggs (2 whole + 2 whites) with mushrooms, spinach, onions</li>
+                                <li>1 slice whole grain toast</li>
+                                <li>Sliced avocado (2 tbsp)</li>
+                                <li>Fresh melon (½ cup)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (510 cal | 38g P | 54g C | 14g F)</div>
+                            <ul>
+                                <li>Veggie egg scramble: eggs (3 whole + 2 whites) with mushrooms, spinach, onions</li>
+                                <li>2 slices whole grain toast</li>
+                                <li>Sliced avocado (¼ cup)</li>
+                                <li>Fresh melon (½ cup)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Sauté vegetables, scramble eggs in same pan
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">11:00 AM - MID-MORNING SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (190 cal | 18g P | 20g C | 5g F)</div>
+                            <ul>
+                                <li>Plain Greek yogurt (¾ cup)</li>
+                                <li>Sliced peaches</li>
+                                <li>Sprinkle of granola (1 tbsp)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (260 cal | 24g P | 28g C | 7g F)</div>
+                            <ul>
+                                <li>Plain Greek yogurt (1 cup)</li>
+                                <li>Sliced peaches</li>
+                                <li>Sprinkle of granola (2 tbsp)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">1:30 PM - LUNCH</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (410 cal | 32g P | 42g C | 11g F)</div>
+                            <ul>
+                                <li>Chicken fajita bowl (no tortilla): grilled chicken (4 oz)</li>
+                                <li>Bell peppers, onions, lettuce</li>
+                                <li>Black beans (¼ cup)</li>
+                                <li>Salsa and Greek yogurt (instead of sour cream)</li>
+                                <li>Small side of brown rice (⅓ cup)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (570 cal | 46g P | 58g C | 16g F)</div>
+                            <ul>
+                                <li>Chicken fajita bowl (no tortilla): grilled chicken (6 oz)</li>
+                                <li>Bell peppers, onions, lettuce</li>
+                                <li>Black beans (⅓ cup)</li>
+                                <li>Salsa and Greek yogurt (instead of sour cream)</li>
+                                <li>Side of brown rice (½ cup)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Sauté peppers and onions, grill chicken with fajita spices
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">4:00 PM - AFTERNOON SNACK</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (160 cal | 5g P | 22g C | 7g F)</div>
+                            <ul>
+                                <li>Apple slices with almond butter (1 tbsp)</li>
+                                <li>Cinnamon sprinkle</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (220 cal | 7g P | 30g C | 10g F)</div>
+                            <ul>
+                                <li>Apple slices with almond butter (1.5 tbsp)</li>
+                                <li>Cinnamon sprinkle</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">6:30 PM - DINNER (REST DAY - LIGHTER)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (360 cal | 30g P | 38g C | 8g F)</div>
+                            <ul>
+                                <li>Baked salmon (4 oz) with dill and lemon</li>
+                                <li>Roasted vegetable medley (zucchini, bell peppers, red onion)</li>
+                                <li>Wild rice pilaf (½ cup)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (520 cal | 44g P | 52g C | 13g F)</div>
+                            <ul>
+                                <li>Baked salmon (6 oz) with dill and lemon</li>
+                                <li>Roasted vegetable medley (zucchini, bell peppers, red onion)</li>
+                                <li>Wild rice pilaf (¾ cup)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="cooking-note">
+                        <strong>Cooking Together:</strong> Bake salmon and roast vegetables on same sheet pan
+                    </div>
+                </div>
+                
+                <div class="meal">
+                    <div class="meal-header">
+                        <div class="meal-time">9:00 PM - EVENING SNACK (OPTIONAL)</div>
+                    </div>
+                    <div class="portions">
+                        <div class="portion">
+                            <div class="portion-label">FEMALE (110 cal | 14g P | 10g C | 2g F)</div>
+                            <ul>
+                                <li>Low-fat cottage cheese (½ cup)</li>
+                                <li>Sliced strawberries (4-5)</li>
+                            </ul>
+                        </div>
+                        <div class="portion male">
+                            <div class="portion-label">MALE (150 cal | 20g P | 14g C | 3g F)</div>
+                            <ul>
+                                <li>Low-fat cottage cheese (¾ cup)</li>
+                                <li>Sliced strawberries (6-8)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="totals">
+                    <div class="total-item">
+                        <strong>FEMALE TOTALS:</strong><br>
+                        1,600 cal | 127g P | 172g C | 42g F
+                    </div>
+                    <div class="total-item">
+                        <strong>MALE TOTALS:</strong><br>
+                        2,230 cal | 179g P | 236g C | 63g F
+                    </div>
+                </div>
+            </div>
+
+            <!-- WEEKLY SUMMARY -->
+            <div class="summary-section">
+                <h2>📊 Weekly Summary - Week 2</h2>
+                
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <h3>👩 Female 55 Weekly Totals</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li><strong>Average Daily Calories:</strong> 1,616 cal</li>
+                            <li><strong>Average Protein:</strong> 146g (36%)</li>
+                            <li><strong>Average Carbs:</strong> 179g (44%)</li>
+                            <li><strong>Average Fat:</strong> 37g (20%)</li>
+                            <li><strong>Workout Days:</strong> 6 (Mon-Sat)</li>
+                            <li><strong>Weekly Calorie Burn:</strong> ~2,400-3,100</li>
+                            <li><strong>Net Weekly Deficit:</strong> ~3,500-4,200 calories</li>
+                            <li><strong>Expected Weight Loss:</strong> 1-1.2 lbs/week</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="summary-card">
+                        <h3>👨 Male 57 Weekly Totals</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li><strong>Average Daily Calories:</strong> 2,260 cal</li>
+                            <li><strong>Average Protein:</strong> 203g (36%)</li>
+                            <li><strong>Average Carbs:</strong> 245g (43%)</li>
+                            <li><strong>Average Fat:</strong> 56g (21%)</li>
+                            <li><strong>Workout Days:</strong> 6 (Mon-Sat)</li>
+                            <li><strong>Weekly Calorie Burn:</strong> ~2,800-3,600</li>
+                            <li><strong>Net Weekly Deficit:</strong> ~3,000-3,800 calories</li>
+                            <li><strong>Expected Weight Loss:</strong> 0.8-1.1 lbs/week</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="prep-section">
+                    <h3>🍳 Sunday Meal Prep (2-3 Hours)</h3>
+                    <ul class="checklist">
+                        <li>Grill all chicken breasts for the week (Female: 2 lbs | Male: 3 lbs)</li>
+                        <li>Hard boil 18 eggs total (for snacks and breakfasts)</li>
+                        <li>Bake cod and tilapia portions for Monday and Friday</li>
+                        <li>Cook quinoa, wild rice, and brown rice (4 cups total mixed grains)</li>
+                        <li>Prep tuna salad mixture for Wednesday (refrigerate separately)</li>
+                        <li>Wash and portion all vegetables and fruits</li>
+                        <li>Pre-measure protein powder servings into small containers</li>
+                        <li>Make Greek yogurt tzatziki and Caesar dressing</li>
+                        <li>Portion turkey breast and deli meats into daily containers</li>
+                    </ul>
+                </div>
+                
+                <div class="variety-highlights">
+                    <h3>✨ New Variety in Week 2</h3>
+                    <ul style="list-style: none; padding-left: 0;">
+                        <li>✓ Cottage cheese breakfast bowls</li>
+                        <li>✓ Asian-style ground turkey lettuce wraps</li>
+                        <li>✓ Mediterranean chicken pitas with tzatziki</li>
+                        <li>✓ Tuna salad stuffed tomatoes</li>
+                        <li>✓ Shrimp and avocado salads with farro</li>
+                        <li>✓ French toast weekend breakfast</li>
+                        <li>✓ Open-faced tuna melts</li>
+                        <li>✓ Turkey burger patties (no bun)</li>
+                        <li>✓ Chicken fajita bowls</li>
+                        <li>✓ Salmon with roasted vegetables</li>
+                        <li>✓ Multiple fish varieties (cod, tilapia, salmon)</li>
+                        <li>✓ Overnight oats with raspberries</li>
+                        <li>✓ Breakfast burritos</li>
+                        <li>✓ Egg and sausage muffins</li>
+                        <li>✓ Greek yogurt parfaits</li>
+                    </ul>
+                </div>
+                <div class="prep-section" style="margin-top: 40px;">
+                    <h2 style="color: #667eea; text-align: center; margin-bottom: 30px;">🛒 Weekly Shopping List</h2>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #e74c3c;">
+                            <h3 style="color: #e74c3c; margin-bottom: 15px;">🥩 Proteins</h3>
+                            <ul class="checklist">
+                                <li>Chicken breast (5-6 lbs total)</li>
+                                <li>Ground turkey (1.5-2 lbs)</li>
+                                <li>Turkey breast deli meat (2 lbs)</li>
+                                <li>Turkey sausage links (2 packages)</li>
+                                <li>Turkey sausage patties (1 package)</li>
+                                <li>Turkey bacon (2 packages)</li>
+                                <li>Cod fillets (1.5 lbs)</li>
+                                <li>Tilapia fillets (1.5 lbs)</li>
+                                <li>Salmon fillets (1.5 lbs)</li>
+                                <li>Shrimp, peeled & deveined (1.5 lbs)</li>
+                                <li>Canned tuna in water (4-5 cans, 5oz each)</li>
+                                <li>Eggs (3 dozen)</li>
+                                <li>Whey protein powder (vanilla & chocolate)</li>
+                                <li>Ground turkey for burgers (1 lb)</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #3498db;">
+                            <h3 style="color: #3498db; margin-bottom: 15px;">🥛 Dairy & Cheese</h3>
+                            <ul class="checklist">
+                                <li>Plain non-fat Greek yogurt (4-5 large containers)</li>
+                                <li>Low-fat cottage cheese (3 containers, 16oz each)</li>
+                                <li>String cheese (2 packages)</li>
+                                <li>Low-fat cheese slices (1 package)</li>
+                                <li>Parmesan cheese (small container)</li>
+                                <li>Unsweetened almond milk (2 cartons)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #f39c12;">
+                            <h3 style="color: #f39c12; margin-bottom: 15px;">🌾 Grains & Breads</h3>
+                            <ul class="checklist">
+                                <li>Ezekiel bread (2 loaves)</li>
+                                <li>Whole grain bread (2 loaves)</li>
+                                <li>English muffins (1 package)</li>
+                                <li>Whole wheat pita bread (1 package, 6" & 8")</li>
+                                <li>Whole grain tortillas (1 package, 8" & 10")</li>
+                                <li>Whole grain crackers (2 boxes)</li>
+                                <li>Rice cakes (1 package)</li>
+                                <li>Steel-cut oats (1 container)</li>
+                                <li>Rolled oats (1 container)</li>
+                                <li>Brown rice (2 lbs)</li>
+                                <li>Jasmine rice (1 lb)</li>
+                                <li>Wild rice (1 lb)</li>
+                                <li>Quinoa (1 lb)</li>
+                                <li>Farro or barley (1 lb)</li>
+                                <li>Low-sugar granola (1 box)</li>
+                                <li>Whole grain croutons (1 bag)</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #27ae60;">
+                            <h3 style="color: #27ae60; margin-bottom: 15px;">🥬 Fresh Vegetables</h3>
+                            <ul class="checklist">
+                                <li>Spinach (2-3 bags or containers)</li>
+                                <li>Mixed salad greens (3-4 containers)</li>
+                                <li>Romaine lettuce (2 heads)</li>
+                                <li>Bell peppers - assorted colors (8-10)</li>
+                                <li>Cherry tomatoes (3 containers)</li>
+                                <li>Regular tomatoes (6-8)</li>
+                                <li>Cucumbers (4-5)</li>
+                                <li>Celery (2 bunches)</li>
+                                <li>Baby carrots (3-4 bags)</li>
+                                <li>Snap peas (2 bags)</li>
+                                <li>Asparagus (2 bunches)</li>
+                                <li>Broccoli (2-3 crowns)</li>
+                                <li>Brussels sprouts (2 lbs)</li>
+                                <li>Zucchini (4-5)</li>
+                                <li>Green beans (2 lbs)</li>
+                                <li>Mushrooms (2 containers)</li>
+                                <li>Onions - yellow & red (6 total)</li>
+                                <li>Red onion (2)</li>
+                                <li>Garlic (2 bulbs)</li>
+                                <li>Fresh dill (1 bunch)</li>
+                                <li>Fresh cilantro (1 bunch)</li>
+                                <li>Radishes (1 bunch)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #e91e63;">
+                            <h3 style="color: #e91e63; margin-bottom: 15px;">🍎 Fresh Fruits</h3>
+                            <ul class="checklist">
+                                <li>Apples (8-10)</li>
+                                <li>Bananas (12-15)</li>
+                                <li>Blueberries (3-4 containers)</li>
+                                <li>Strawberries (3-4 containers)</li>
+                                <li>Raspberries (2 containers)</li>
+                                <li>Mixed berries (2 containers)</li>
+                                <li>Grapes (2-3 lbs)</li>
+                                <li>Cherries (1 lb)</li>
+                                <li>Peaches (6-8)</li>
+                                <li>Pears (3-4)</li>
+                                <li>Clementines (1 bag)</li>
+                                <li>Melon (1-2, cantaloupe or honeydew)</li>
+                                <li>Pineapple chunks (2 containers)</li>
+                                <li>Lemons (6-8)</li>
+                                <li>Limes (4-6)</li>
+                                <li>Frozen mango (1 bag)</li>
+                                <li>Frozen mixed berries (2 bags)</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #9b59b6;">
+                            <h3 style="color: #9b59b6; margin-bottom: 15px;">🥔 Starchy Vegetables</h3>
+                            <ul class="checklist">
+                                <li>Sweet potatoes (6-8 medium)</li>
+                                <li>Avocados (4-6)</li>
+                            </ul>
+                            
+                            <h3 style="color: #9b59b6; margin-top: 25px; margin-bottom: 15px;">🥜 Nuts & Seeds</h3>
+                            <ul class="checklist">
+                                <li>Almonds, raw (1 lb)</li>
+                                <li>Almond butter (1 jar)</li>
+                                <li>Peanut butter (1 jar)</li>
+                                <li>Chia seeds (1 bag)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #16a085;">
+                            <h3 style="color: #16a085; margin-bottom: 15px;">🥫 Pantry Staples & Condiments</h3>
+                            <ul class="checklist">
+                                <li>Hummus (2-3 containers)</li>
+                                <li>Guacamole (2-3 containers) or make fresh</li>
+                                <li>Salsa (2 jars)</li>
+                                <li>Low-sodium soy sauce</li>
+                                <li>Dijon mustard</li>
+                                <li>Balsamic vinegar</li>
+                                <li>Apple cider vinegar</li>
+                                <li>Olive oil</li>
+                                <li>Cooking spray</li>
+                                <li>Black beans (2 cans, 15oz)</li>
+                                <li>Chickpeas (optional)</li>
+                                <li>Water chestnuts (1 can)</li>
+                                <li>Sugar-free syrup</li>
+                                <li>Honey (small bottle)</li>
+                                <li>Anchovy paste (for Caesar dressing)</li>
+                                <li>Everything bagel seasoning</li>
+                            </ul>
+                        </div>
+                        
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; border-left: 5px solid #d35400;">
+                            <h3 style="color: #d35400; margin-bottom: 15px;">🧂 Spices & Seasonings</h3>
+                            <ul class="checklist">
+                                <li>Cinnamon</li>
+                                <li>Vanilla extract</li>
+                                <li>Garlic powder</li>
+                                <li>Fresh garlic</li>
+                                <li>Fresh ginger</li>
+                                <li>Dried oregano</li>
+                                <li>Dried basil</li>
+                                <li>Dried dill</li>
+                                <li>Paprika</li>
+                                <li>Cumin</li>
+                                <li>Fajita seasoning blend</li>
+                                <li>Italian seasoning</li>
+                                <li>Black pepper</li>
+                                <li>Sea salt</li>
+                                <li>Lemon pepper</li>
+                            </ul>
+                            
+                            <h3 style="color: #d35400; margin-top: 25px; margin-bottom: 15px;">☕ Beverages</h3>
+                            <ul class="checklist">
+                                <li>Coffee or tea (your preference)</li>
+                                <li>Water (stay hydrated!)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 25px; border-radius: 8px; margin-top: 30px;">
+                        <h3 style="margin-bottom: 15px;">💡 Shopping Tips</h3>
+                        <ul style="list-style: none; padding-left: 0;">
+                            <li>✓ Shop on Saturday or Sunday morning for freshest selection</li>
+                            <li>✓ Buy proteins in bulk and freeze what you won't use in 3-4 days</li>
+                            <li>✓ Pre-washed salad greens save prep time</li>
+                            <li>✓ Frozen fruits work great for smoothies and cost less</li>
+                            <li>✓ Look for sales on protein bars (Quest, ONE, etc.)</li>
+                            <li>✓ Buy seasonal produce for better prices and flavor</li>
+                            <li>✓ Store herbs in water like flowers to keep fresh longer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center; padding: 30px;">
+            <h2 style="margin-bottom: 10px;">Ready to shop and continue your progress! 💪👫🍽️</h2>
+            <p style="font-size: 0.9em; opacity: 0.9;">Week 2 - Fresh Variety, Same Results</p>
+        </div>
+    </div>
+</body>
+</html>
